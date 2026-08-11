@@ -29,11 +29,12 @@ BM25, hybrid RRF, простую маршрутизацию и `bge-reranker-v2-
 | hybrid RRF | **229 / 240** | **238 / 240** | **230 / 240** | **0,883** |
 
 <p align="center">
-  <img src="docs/results.svg" alt="Сравнение dense, BM25 и hybrid, а также hybrid до и после BGE" width="100%">
+  <img src="docs/article-retrieval.png" alt="Промахи dense, BM25 и hybrid в top-10" width="100%">
 </p>
 
-Отдельные графики для статьи: [промахи retrieval](docs/article-retrieval.svg)
-и [эффект BGE](docs/article-reranking.svg).
+<p align="center">
+  <img src="docs/article-reranking.png" alt="Изменение Hit@10 и nDCG@10 после BGE" width="100%">
+</p>
 
 По Hit@10 BGE добавил hybrid одну находку. Его основная работа видна по
 nDCG@10: метрика выросла с `0,832` до `0,883`, то есть нужные фрагменты в
