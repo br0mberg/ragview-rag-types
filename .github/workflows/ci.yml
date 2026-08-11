@@ -1,0 +1,43 @@
+name: verify
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: verify-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: ./mvnw --batch-mode --no-transfer-progress test
+      - run: python -m unittest discover -s tools -p 'test_*.py'
+      - name: Run BM25 smoke benchmark
+        run: ./mvnw --batch-mode --no-transfer-progress spring-boot:run
+        env:
+          RAGVIEW_STRATEGIES: bm25
+          RAGVIEW_DATASET_PATH: data/fixtures/smoke
+          RAGVIEW_TOP_K: "2"
+          RAGVIEW_CANDIDATE_POOL: "5"
+          RAGVIEW_CANDIDATE_DUMP_LIMIT: "5"
+          RAGVIEW_RERANK_POOLS: "2,5"
+          RAGVIEW_WARMUP_QUERIES: "0"
+          RAGVIEW_OUTPUT: results/runs/local/ci/comparison.csv
+      - run: sha256sum -c MANIFEST.sha256
+        working-directory: results/article

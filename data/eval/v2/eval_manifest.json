@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "evalVersion": "tax-eval-v2-paired",
+  "pairs": 120,
+  "questions": 240,
+  "selectionSha256": "29783139bd52ac7a255d15e8b6850f6b2de1c9cbd14d8c2f3159c25f6de10988",
+  "articlesSha256": "fc9c03a3d47989df45757cdcd03612adaf250ce773477e0f14338fdb50a90fb1",
+  "corpusSha256": "366c21d0599f8742d16584ae2870544de5f71ff652cdea85a54bc76e93ae6d52",
+  "questionsSha256": "95deee4ed43d724e50163983bef8b6b5efd2f0bf979b36bc2cb1aa4dc65d3211",
+  "reviewSha256": {
+    "approved-review-a1.json": "d4831457fdcea860573089c4d4b2eade4a9de992759ec8bee5ef0b7529d3b27e",
+    "approved-review-a2.json": "f7d5d8a8e1ecfcfb5b5833266a375160988f2517bf8f1a2be866e7c9d2b20cfa",
+    "approved-review-a3.json": "15823584747671d14fc7061261f791c05b5414ea8325f1a1d52237566cab7070",
+    "approved-review-a4.json": "cad69bdb87aebeaeb834a710df3eac540cb1c03c852d4c81cc58c95ee569122e",
+    "approved-review-b1.json": "aa40f80f340f6e7ece3d48a62077b72c0b5d2a0487d973012dc3acfcf46ebdcf",
+    "approved-review-b2.json": "3254f069fde8c23751852d53e78a6be9ce2e665e174222d15be021b3b6541868",
+    "approved-review-b3.json": "2c27eb9c76cd5e0a17d76aad82d52bd3d3db352c5d59616e0f103585d0814482",
+    "approved-review-b4.json": "af168654e6bf253105bab5eea81227af710eabdb6be17d6282916374fbd7aa3f",
+    "approved-review-c1.json": "bea092f9e86ea0ff809356e8b3161dafd891fef7d45c0ac744c4385c593047f2",
+    "approved-review-c2.json": "3ecb4a8d77b559177e95928f1a073fa26a3968615333279b473fb3cf3a48e636",
+    "approved-review-c3.json": "ee84d081194d25e11969e5da3d5fc64b3edbc455714add6bfdea1389deaf5e1f",
+    "approved-review-c4.json": "11df353ca715003c706e458c971acfccca8591754203a91aeb746e2069e6b678"
+  },
+  "reviewStatus": "approved",
+  "semanticEvidenceTokenJaccard": {
+    "min": 0.0,
+    "median": 0.083333,
+    "max": 0.555556
+  },
+  "policy": {
+    "unit": "one parent article with paired exact and semantic questions",
+    "qrelUnit": "passage containing the declared evidence",
+    "exactDifference": "article identifier only; information need and qrels are unchanged"
+  }
+}

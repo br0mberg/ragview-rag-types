@@ -1,0 +1,23 @@
+[
+  {
+    "id": "exact-107",
+    "question": "Что устанавливает статья 107 НК РФ?",
+    "relevantDocId": "doc-107",
+    "relevantDocIds": ["doc-107"],
+    "kind": "exact"
+  },
+  {
+    "id": "exact-93-1",
+    "question": "В какой срок представляют документы по статье 93.1?",
+    "relevantDocId": "doc-93-1",
+    "relevantDocIds": ["doc-93-1"],
+    "kind": "exact"
+  },
+  {
+    "id": "semantic-capital",
+    "question": "Считается ли реализацией вклад имущества в уставный капитал?",
+    "relevantDocId": "doc-39",
+    "relevantDocIds": ["doc-39"],
+    "kind": "semantic"
+  }
+]

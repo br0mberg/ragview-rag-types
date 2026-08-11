@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "algorithmVersion": "ragview-java-v2-rrf-docid",
+  "runtime": {
+    "expectedDevice": "cuda",
+    "embeddingServerSchemaVersion": 1
+  },
+  "topK": 10,
+  "branchCandidatePool": 50,
+  "candidateDumpLimit": 100,
+  "rrf": {
+    "k": 60,
+    "tieBreak": "docId ascending"
+  },
+  "rerank": {
+    "primaryPool": 50,
+    "ablationPools": [10, 20, 30, 50, 100],
+    "tieBreak": "first-stage rank, then docId",
+    "model": "BAAI/bge-reranker-v2-m3",
+    "revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
+    "precision": "fp16",
+    "batchSize": 64,
+    "maxLengthTokens": 512
+  },
+  "dense": {
+    "model": "sergeyzh/BERTA",
+    "revision": "914c8c8aed14042ed890fc2c662d5e9e66b2faa7",
+    "pooling": "mean",
+    "dimensions": 768,
+    "queryPrefix": "search_query: ",
+    "documentPrefix": "search_document: "
+  },
+  "bm25": {
+    "k1": 1.2,
+    "b": 0.75,
+    "analyzer": "Apache Lucene RussianAnalyzer",
+    "luceneVersion": "10.3.2"
+  },
+  "chunking": {
+    "algorithm": "paragraph-greedy-lossless-v1",
+    "maxChars": 4000
+  }
+}

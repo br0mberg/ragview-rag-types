@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: ragview-rag-types
+  main:
+    web-application-type: none
+embedding-server:
+  expected-device: ${RAGVIEW_EXPECTED_DEVICE:cuda}
+  reranker-precision: ${RAGVIEW_RERANK_PRECISION:fp16}
+ragview:
+  top-k: ${RAGVIEW_TOP_K:10}
+  candidate-pool: ${RAGVIEW_CANDIDATE_POOL:50}
+  candidate-dump-limit: ${RAGVIEW_CANDIDATE_DUMP_LIMIT:100}
+  rrf-k: ${RAGVIEW_RRF_K:60}
+  rerank-enabled: ${RAGVIEW_RERANK_ENABLED:false}
+  rerank-pools: ${RAGVIEW_RERANK_POOLS:10,20,30,50,100}
+  warmup-queries: ${RAGVIEW_WARMUP_QUERIES:50}
+  strategies: ${RAGVIEW_STRATEGIES:dense,bm25,hybrid}
+  dataset-path: ${RAGVIEW_DATASET_PATH:data/tax-code-snapshot}
+  output-path: ${RAGVIEW_OUTPUT:results/comparison.csv}
+
+logging:
+  level:
+    root: INFO
+    ru.brombin.ragview: INFO
+    org.springframework.web.client: WARN

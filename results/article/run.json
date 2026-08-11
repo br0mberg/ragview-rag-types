@@ -1,0 +1,28 @@
+{
+  "runId": "tax-eval-v2-article",
+  "finishedAt": "2026-08-03T13:11:00+03:00",
+  "dataset": {
+    "pairs": 120,
+    "questions": 240,
+    "articles": 815,
+    "chunks": 2074,
+    "corpusSha256": "366c21d0599f8742d16584ae2870544de5f71ff652cdea85a54bc76e93ae6d52",
+    "questionsSha256": "95deee4ed43d724e50163983bef8b6b5efd2f0bf979b36bc2cb1aa4dc65d3211"
+  },
+  "configuration": {
+    "topK": 10,
+    "candidatePool": 50,
+    "rrfK": 60,
+    "rerankPool": 50
+  },
+  "models": {
+    "dense": "sergeyzh/BERTA@914c8c8aed14042ed890fc2c662d5e9e66b2faa7",
+    "reranker": "BAAI/bge-reranker-v2-m3@953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
+    "device": "cuda",
+    "precision": "fp16"
+  },
+  "hardware": {
+    "gpu": "NVIDIA GeForce RTX 5060 Ti",
+    "vramMiB": 16311
+  }
+}

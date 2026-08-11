@@ -1,0 +1,16 @@
+stage,strategy,metric,value,hits,queries
+retrieval,dense,hit_at_10,0.8875,213,240
+retrieval,bm25,hit_at_10,0.9333,224,240
+retrieval,hybrid,hit_at_10,0.9542,229,240
+candidate_pool,dense,hit_at_50,0.9750,234,240
+candidate_pool,bm25,hit_at_50,0.9750,234,240
+candidate_pool,hybrid,hit_at_50,0.9917,238,240
+rerank,dense,hit_at_10,0.9583,230,240
+rerank,bm25,hit_at_10,0.9500,228,240
+rerank,hybrid,hit_at_10,0.9583,230,240
+retrieval,hybrid,ndcg_at_10,0.8324,,240
+rerank,hybrid,ndcg_at_10,0.8827,,240
+routing,routing,hit_at_10,0.9500,228,240
+routing,routing,ndcg_at_10,0.8469,,240
+rerank,bge_pool_20,latency_p50_ms,236.0,,240
+rerank,bge_pool_50,latency_p50_ms,660.0,,240
