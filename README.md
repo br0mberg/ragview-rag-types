@@ -4,6 +4,7 @@
 
 # RAGVIEW
 
+[![CI](https://github.com/br0mberg/ragview-rag-types/actions/workflows/ci.yml/badge.svg)](https://github.com/br0mberg/ragview-rag-types/actions/workflows/ci.yml)
 ![Java 21](https://img.shields.io/badge/Java-21-ED8B00?logo=openjdk&logoColor=white)
 ![Spring Boot 3.4.5](https://img.shields.io/badge/Spring%20Boot-3.4.5-6DB33F?logo=springboot&logoColor=white)
 [![MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
