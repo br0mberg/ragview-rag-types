@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1560" height="620" viewBox="0 0 1560 620" role="img" aria-labelledby="title desc">
+  <title id="title">Промахи retrieval в top-10</title>
+  <desc id="desc">Из 240 вопросов dense не нашёл ответ в 27 случаях, BM25 в 16, hybrid в 11.</desc>
+
+  <rect width="1560" height="620" rx="26" fill="#f6f0e4"/>
+
+  <text x="70" y="78" font-family="DejaVu Sans, Arial, sans-serif" font-size="44" font-weight="700" fill="#171411">Промахи поиска в top-10</text>
+  <text x="70" y="118" font-family="DejaVu Sans, Arial, sans-serif" font-size="23" fill="#71695f">240 вопросов по Налоговому кодексу · меньше — лучше</text>
+  <path d="M70 141 C250 134 430 147 610 139" fill="none" stroke="#c92d22" stroke-width="6" stroke-linecap="round"/>
+
+  <text x="70" y="239" font-family="DejaVu Sans, Arial, sans-serif" font-size="30" fill="#27221d">dense</text>
+  <path d="M270 210 C277 204 286 203 299 204 C515 202 824 207 1118 203 L1136 205 L1124 211 L1141 215 L1127 221 L1143 226 L1127 232 L1138 238 L1118 242 C821 239 511 245 296 243 C282 243 273 239 269 232 C266 224 266 216 270 210 Z" fill="#6d6861"/>
+  <text x="1165" y="239" font-family="DejaVu Sans, Arial, sans-serif" font-size="31" font-weight="700" fill="#27221d">27</text>
+
+  <text x="70" y="344" font-family="DejaVu Sans, Arial, sans-serif" font-size="30" fill="#27221d">BM25</text>
+  <path d="M270 315 C277 309 286 308 299 309 C426 307 612 312 766 308 L784 310 L772 316 L789 320 L775 326 L791 331 L775 337 L786 343 L766 347 C610 344 423 350 296 348 C282 348 273 344 269 337 C266 329 266 321 270 315 Z" fill="#6d6861"/>
+  <text x="813" y="344" font-family="DejaVu Sans, Arial, sans-serif" font-size="31" font-weight="700" fill="#27221d">16</text>
+
+  <text x="70" y="449" font-family="DejaVu Sans, Arial, sans-serif" font-size="30" font-weight="700" fill="#b9251b">hybrid</text>
+  <path d="M270 420 C277 414 286 413 299 414 C390 412 510 417 606 413 L624 415 L612 421 L629 425 L615 431 L631 436 L615 442 L626 448 L606 452 C508 449 387 455 296 453 C282 453 273 449 269 442 C266 434 266 426 270 420 Z" fill="#c92d22"/>
+  <text x="653" y="449" font-family="DejaVu Sans, Arial, sans-serif" font-size="31" font-weight="700" fill="#a91d15">11</text>
+
+  <text x="270" y="505" font-family="DejaVu Sans, Arial, sans-serif" font-size="19" fill="#8a8176">0</text>
+  <text x="579" y="505" font-family="DejaVu Sans, Arial, sans-serif" font-size="19" fill="#8a8176">10</text>
+  <text x="899" y="505" font-family="DejaVu Sans, Arial, sans-serif" font-size="19" fill="#8a8176">20</text>
+  <text x="1210" y="505" font-family="DejaVu Sans, Arial, sans-serif" font-size="19" fill="#8a8176">30</text>
+
+  <image href="telegram-plane.png" x="73" y="555" width="29" height="27"/>
+  <text x="110" y="578" font-family="DejaVu Sans, Arial, sans-serif" font-size="17" font-weight="600" fill="#171411">@devbrombin</text>
+
+  <image href="author-seal.png" x="1478" y="530" width="34" height="56"/>
+</svg>
