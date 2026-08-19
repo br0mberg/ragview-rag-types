@@ -126,6 +126,8 @@ def create_app(
                 "revision": reranker_revision,
                 "precision": reranker.precision,
                 "device": reranker.device,
+                "batchSize": reranker.batch_size,
+                "maxLength": reranker.max_length,
             }
         return {
             "schemaVersion": 1,
@@ -170,7 +172,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--device", default="auto")
     parser.add_argument("--with-reranker", action="store_true")
     parser.add_argument("--rerank-batch-size", type=int, default=64)
-    parser.add_argument("--rerank-max-length", type=int, default=512)
+    parser.add_argument("--rerank-max-length", type=int, default=1024)
     parser.add_argument("--rerank-precision", choices=["fp16", "fp32"], default="fp16")
     args = parser.parse_args()
     if args.batch_size <= 0 or args.rerank_batch_size <= 0 or args.rerank_max_length <= 0:

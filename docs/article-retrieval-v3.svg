@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1560" height="620" viewBox="0 0 1560 620" role="img" aria-labelledby="title desc">
+  <title id="title">Где hybrid помог</title>
+  <desc id="desc">На 186 вопросах hybrid почти не изменил число промахов среди первых 10 чанков, но среди первых 50 сократил их до 4 против 10 у dense и 9 у BM25.</desc>
+
+  <rect width="1560" height="620" rx="26" fill="#f6f0e4"/>
+
+  <text x="70" y="78" font-family="DejaVu Sans, Arial, sans-serif" font-size="44" font-weight="700" fill="#171411">Где hybrid помог</text>
+  <text x="70" y="118" font-family="DejaVu Sans, Arial, sans-serif" font-size="23" fill="#71695f">Промахи по 186 вопросам с процитированной статьёй · меньше — лучше</text>
+  <path d="M70 141 C250 134 430 147 610 139" fill="none" stroke="#c92d22" stroke-width="6" stroke-linecap="round"/>
+
+  <text x="70" y="205" font-family="DejaVu Sans, Arial, sans-serif" font-size="28" font-weight="700" fill="#27221d">Первые 10 чанков</text>
+  <text x="825" y="205" font-family="DejaVu Sans, Arial, sans-serif" font-size="28" font-weight="700" fill="#27221d">Первые 50 чанков</text>
+  <path d="M780 180 C775 270 785 390 779 485" fill="none" stroke="#d9d0c2" stroke-width="4" stroke-linecap="round"/>
+
+  <text x="70" y="285" font-family="DejaVu Sans, Arial, sans-serif" font-size="26" fill="#27221d">dense</text>
+  <path d="M245 257 C252 251 261 250 274 251 C344 249 420 254 472 250 L489 252 L478 258 L493 262 L481 268 L495 273 L481 279 L491 285 L472 289 C419 286 341 292 271 290 C257 290 248 286 244 279 C241 271 241 263 245 257 Z" fill="#6d6861"/>
+  <text x="515" y="285" font-family="DejaVu Sans, Arial, sans-serif" font-size="29" font-weight="700" fill="#27221d">24</text>
+
+  <text x="70" y="375" font-family="DejaVu Sans, Arial, sans-serif" font-size="26" fill="#27221d">BM25</text>
+  <path d="M245 347 C252 341 261 340 274 341 C385 339 504 344 563 340 L580 342 L569 348 L584 352 L572 358 L586 363 L572 369 L582 375 L563 379 C503 376 382 382 271 380 C257 380 248 376 244 369 C241 361 241 353 245 347 Z" fill="#6d6861"/>
+  <text x="606" y="375" font-family="DejaVu Sans, Arial, sans-serif" font-size="29" font-weight="700" fill="#27221d">33</text>
+
+  <text x="70" y="465" font-family="DejaVu Sans, Arial, sans-serif" font-size="26" font-weight="700" fill="#b9251b">hybrid</text>
+  <path d="M245 437 C252 431 261 430 274 431 C341 429 414 434 462 430 L479 432 L468 438 L483 442 L471 448 L485 453 L471 459 L481 465 L462 469 C413 466 338 472 271 470 C257 470 248 466 244 459 C241 451 241 443 245 437 Z" fill="#c92d22"/>
+  <text x="505" y="465" font-family="DejaVu Sans, Arial, sans-serif" font-size="29" font-weight="700" fill="#a91d15">23</text>
+
+  <text x="825" y="285" font-family="DejaVu Sans, Arial, sans-serif" font-size="26" fill="#27221d">dense</text>
+  <path d="M1000 257 C1007 251 1016 250 1029 251 C1050 249 1070 254 1083 250 L1100 252 L1089 258 L1104 262 L1092 268 L1106 273 L1092 279 L1102 285 L1083 289 C1069 286 1047 292 1026 290 C1012 290 1003 286 999 279 C996 271 996 263 1000 257 Z" fill="#6d6861"/>
+  <text x="1126" y="285" font-family="DejaVu Sans, Arial, sans-serif" font-size="29" font-weight="700" fill="#27221d">10</text>
+
+  <text x="825" y="375" font-family="DejaVu Sans, Arial, sans-serif" font-size="26" fill="#27221d">BM25</text>
+  <path d="M1000 347 C1007 341 1016 340 1029 341 C1047 339 1065 344 1073 340 L1090 342 L1079 348 L1094 352 L1082 358 L1096 363 L1082 369 L1092 375 L1073 379 C1064 376 1044 382 1026 380 C1012 380 1003 376 999 369 C996 361 996 353 1000 347 Z" fill="#6d6861"/>
+  <text x="1116" y="375" font-family="DejaVu Sans, Arial, sans-serif" font-size="29" font-weight="700" fill="#27221d">9</text>
+
+  <text x="825" y="465" font-family="DejaVu Sans, Arial, sans-serif" font-size="26" font-weight="700" fill="#b9251b">hybrid</text>
+  <path d="M1000 437 C1007 431 1016 430 1029 431 L1040 430 L1057 432 L1046 438 L1061 442 L1049 448 L1063 453 L1049 459 L1059 465 L1040 469 L1026 470 C1012 470 1003 466 999 459 C996 451 996 443 1000 437 Z" fill="#c92d22"/>
+  <text x="1083" y="465" font-family="DejaVu Sans, Arial, sans-serif" font-size="29" font-weight="700" fill="#a91d15">4</text>
+
+  <text x="70" y="520" font-family="DejaVu Sans, Arial, sans-serif" font-size="20" fill="#71695f">В top-10 почти ничья</text>
+  <text x="825" y="520" font-family="DejaVu Sans, Arial, sans-serif" font-size="20" fill="#71695f">Широкая выборка: 4 промаха вместо 9–10</text>
+
+  <image href="telegram-plane.png" x="73" y="555" width="29" height="27"/>
+  <text x="110" y="578" font-family="DejaVu Sans, Arial, sans-serif" font-size="17" font-weight="600" fill="#171411">@devbrombin</text>
+  <image href="author-seal.png" x="1478" y="530" width="34" height="56"/>
+</svg>

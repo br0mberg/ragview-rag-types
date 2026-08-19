@@ -52,13 +52,17 @@ public class RagConfig {
     RerankScorer rerankScorer(
             @Value("${embedding-server.base-url:http://127.0.0.1:8077}") String baseUrl,
             @Value("${embedding-server.reranker-precision:fp16}") String precision,
-            @Value("${embedding-server.expected-device:cuda}") String device) {
+            @Value("${embedding-server.expected-device:cuda}") String device,
+            @Value("${embedding-server.reranker-batch-size:64}") int batchSize,
+            @Value("${embedding-server.reranker-max-length:1024}") int maxLength) {
         return new HttpRerankScorer(
                 baseUrl,
                 "BAAI/bge-reranker-v2-m3",
                 "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
                 precision,
-                device);
+                device,
+                batchSize,
+                maxLength);
     }
 
     @Bean

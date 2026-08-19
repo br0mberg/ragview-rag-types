@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+title: "RAGVIEW: dense, BM25, hybrid and reranking benchmark"
+message: "If this repository was useful, cite this software."
+type: software
+authors:
+  - family-names: "Brombin"
+    given-names: "Andrey"
+version: 1.0.0
+date-released: 2026-08-19
+license: MIT
+repository-code: "https://github.com/br0mberg/ragview-rag-types"

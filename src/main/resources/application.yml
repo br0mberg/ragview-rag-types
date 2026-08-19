@@ -6,6 +6,8 @@ spring:
 embedding-server:
   expected-device: ${RAGVIEW_EXPECTED_DEVICE:cuda}
   reranker-precision: ${RAGVIEW_RERANK_PRECISION:fp16}
+  reranker-batch-size: ${RAGVIEW_RERANK_BATCH_SIZE:64}
+  reranker-max-length: ${RAGVIEW_RERANK_MAX_LENGTH:1024}
 ragview:
   top-k: ${RAGVIEW_TOP_K:10}
   candidate-pool: ${RAGVIEW_CANDIDATE_POOL:50}
@@ -17,7 +19,6 @@ ragview:
   strategies: ${RAGVIEW_STRATEGIES:dense,bm25,hybrid}
   dataset-path: ${RAGVIEW_DATASET_PATH:data/tax-code-snapshot}
   output-path: ${RAGVIEW_OUTPUT:results/comparison.csv}
-
 logging:
   level:
     root: INFO

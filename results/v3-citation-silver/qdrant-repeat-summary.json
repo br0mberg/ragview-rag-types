@@ -1,0 +1,65 @@
+{
+  "schemaVersion" : 1,
+  "evalVersion" : "tax-eval-v3-qdrant-1.19-native-hybrid-rrf-repeatability-v1",
+  "inputs" : {
+    "primary" : {
+      "manifestSha256" : "276b496e965c9e9123c0538b70eb0a538ee95047c903080ffb482cc651ca5b2a",
+      "rawRankingsSha256" : "a0bc73218b59d851e824819135da28d8283019e6d25afdf6cee02dedcb96f5f5"
+    },
+    "repeat" : {
+      "manifestSha256" : "7809aaac0181d1293eb873c93bdc77ceed260c3f9c82af4762b9d011d32db1d6",
+      "rawRankingsSha256" : "86491891c209572c525fb23b7118c52b7a72fbcbe9e33d11793578eea3df7482"
+    }
+  },
+  "questionCount" : 240,
+  "primaryClientServerParity" : {
+    "sameFullUnionSetCount" : 240,
+    "sameTop50SetCount" : 189,
+    "sameTop10SetCount" : 231,
+    "scoreEquivalentCount" : 240,
+    "nonTieDifferenceCount" : 0
+  },
+  "repeatability" : {
+    "denseFullOrder" : {
+      "repeatable" : 240,
+      "changed" : 0
+    },
+    "nativeSparseFullOrder" : {
+      "repeatable" : 240,
+      "changed" : 0
+    },
+    "clientRrfFullOrder" : {
+      "repeatable" : 240,
+      "changed" : 0
+    },
+    "serverRrfFullOrder" : {
+      "repeatable" : 0,
+      "changed" : 240
+    },
+    "serverRrfFullSet" : {
+      "repeatable" : 240,
+      "changed" : 0
+    },
+    "serverRrfTop50Order" : {
+      "repeatable" : 4,
+      "changed" : 236
+    },
+    "serverRrfTop50Set" : {
+      "repeatable" : 198,
+      "changed" : 42
+    },
+    "serverRrfTop10Order" : {
+      "repeatable" : 201,
+      "changed" : 39
+    },
+    "serverRrfTop10Set" : {
+      "repeatable" : 233,
+      "changed" : 7
+    }
+  },
+  "publication" : {
+    "containsQuestionOrAnswerText" : false,
+    "containsCorpusText" : false,
+    "containsDocumentOrQuestionIdentifiers" : false
+  }
+}

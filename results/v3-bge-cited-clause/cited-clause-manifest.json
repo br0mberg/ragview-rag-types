@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "evalVersion": "tax-eval-v3-cited-clause-silver-v3",
+  "freezeStatus": "frozen",
+  "ruleVersion": "strict-cited-clause-silver-v3",
+  "parserVersion": "fns-cited-clause-parser-v2",
+  "questionCount": 240,
+  "primaryCitedClauseCount": 79,
+  "articleOnlySingleChunkCount": 12,
+  "mixedLiteralCount": 2,
+  "excludedCount": 147,
+  "corpus": {
+    "filename": "corpus.json",
+    "sha256": "366c21d0599f8742d16584ae2870544de5f71ff652cdea85a54bc76e93ae6d52"
+  },
+  "labels": {
+    "filename": "cited-clause-labels.json",
+    "sha256": "7eb143b1b78f3e3e541ab50f29b3b16f8d7d5a4543a0fecd802d722f6e19c594"
+  }
+}

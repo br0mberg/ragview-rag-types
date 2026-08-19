@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "evalVersion": "tax-eval-v3-citation-silver-v3",
+  "status": "technical_extraction_and_preliminary_temporal_screen_complete_pending_tax_domain_and_temporal_expert_validation",
+  "frame": {
+    "questions": 240,
+    "questionsSha256": "d1f6277f0b07fb3413e43248be8bfb632322b2a4affd0f27fde3a4d60e03dab5",
+    "corpusDocuments": 2074,
+    "corpusSha256": "366c21d0599f8742d16584ae2870544de5f71ff652cdea85a54bc76e93ae6d52"
+  },
+  "citationSilver": {
+    "evaluationSlices": {
+      "preliminaryFiltered": {
+        "id": "preliminary_filtered",
+        "questions": 186,
+        "reportingRole": "primary_technical_before_expert_validation"
+      },
+      "literalCitationAll": {
+        "id": "literal_citation_all",
+        "questions": 191,
+        "reportingRole": "sensitivity"
+      }
+    },
+    "literalCitationQuestions": 191,
+    "metricEligibleQuestions": 186,
+    "provisionalTemporalMismatchCount": 4,
+    "provisionalSourceTypoCount": 1,
+    "partialScopeFlags": 17,
+    "auditDecisionsSha256": "bdeb58b27406e8a3b3933a8fa01286c7390c0f7b4a56d3c288cbff92d7fbe570",
+    "internalEvaluationManifestSha256": "2209ab3e8056cdd24dff475229df2f0a21a6c427adc62707e3d8f02f4a728e71"
+  },
+  "artifacts": {
+    "aggregateCsv": {
+      "filename": "aggregate.csv",
+      "sha256": "3f9bd22772fa06adb9847ce1cc2074554b23fbd0df4418854366b2180c349276"
+    },
+    "perQueryCsv": {
+      "filename": "per-query.csv",
+      "sha256": "2848fff28ad060bd02219439e66a6fba2fe911c329ea47b2f0167395087bb2ef"
+    },
+    "qdrantRepeatSummaryJson": {
+      "filename": "qdrant-repeat-summary.json",
+      "sha256": "37487d0ea19667b6dd17663c422919e0d6a46df825262b3b741d04eaf2f9c3be"
+    }
+  },
+  "publication": {
+    "containsQuestionOrAnswerText": false,
+    "containsCorpusText": false,
+    "containsQrels": false,
+    "containsDocumentIdentifiers": false
+  },
+  "limitation": "Both slices measure retrieval of explicitly cited Tax Code articles at chunk cutoffs, not passage relevance, evidence sufficiency or answer quality. Neither slice is expert-validated qrels or gold."
+}

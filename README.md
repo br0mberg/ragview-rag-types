@@ -4,60 +4,143 @@
 
 # RAGVIEW
 
-[![CI](https://github.com/br0mberg/ragview-rag-types/actions/workflows/ci.yml/badge.svg)](https://github.com/br0mberg/ragview-rag-types/actions/workflows/ci.yml)
 ![Java 21](https://img.shields.io/badge/Java-21-ED8B00?logo=openjdk&logoColor=white)
 ![Spring Boot 3.4.5](https://img.shields.io/badge/Spring%20Boot-3.4.5-6DB33F?logo=springboot&logoColor=white)
+[![CI](https://github.com/br0mberg/ragview-rag-types/actions/workflows/ci.yml/badge.svg)](https://github.com/br0mberg/ragview-rag-types/actions/workflows/ci.yml)
 [![MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 Java-стенд к статье о гибридном поиске и реранкинге. Он сравнивает dense,
-BM25, hybrid RRF, простую маршрутизацию и `bge-reranker-v2-m3` на одной
-выборке вопросов по Налоговому кодексу.
+Lucene BM25, RRF и `bge-reranker-v2-m3` на корпусе Налогового кодекса.
+Генерации ответа здесь нет: эксперимент заканчивается на retrieval и порядке
+чанков перед LLM.
 
-Генерации ответа здесь нет. Стенд измеряет только retrieval: нашёлся ли нужный
-фрагмент и насколько высоко он оказался в выдаче.
+## Что получилось
 
-## Результат
+На предварительно отфильтрованном техническом срезе внешних вопросов ФНС hybrid почти не
+изменил первую десятку, но собрал более полную выборку из 50 кандидатов. Это диагностическая
+глубина первого этапа, а
+не рекомендация отправлять реранкеру все 50 документов.
 
-Корпус: 815 статей НК РФ, 2074 чанка. Выборка: 120 пар вопросов. В каждой паре
-есть обычная формулировка без номера статьи и версия с точной ссылкой на ту же
-статью.
+| Первый этап | Процитированная статья в top-10 | В первых 50 чанках |
+|---|---:|---:|
+| BERTA dense | 162 / 186 | 176 / 186 |
+| Lucene BM25 | 153 / 186 | 177 / 186 |
+| BERTA + BM25, RRF | **163 / 186** | **182 / 186** |
 
-| Первый этап | Hit@10 | Кандидат найден в top-50 | После BGE, Hit@10 | После BGE, nDCG@10 |
-|---|---:|---:|---:|---:|
-| dense | 213 / 240 | 234 / 240 | 230 / 240 | 0,882 |
-| BM25 | 224 / 240 | 234 / 240 | 228 / 240 | 0,878 |
-| hybrid RRF | **229 / 240** | **238 / 240** | **230 / 240** | **0,883** |
+Поштучный разбор показал, где именно появилась разница. На `k=10` hybrid
+дал восемь новых попаданий и потерял семь dense-находок. На `k=50` — шесть
+новых попаданий без единого полного промаха. При этом в пяти вопросах с
+несколькими ссылками hybrid потерял часть процитированных статей.
+Это article-level диагностика, а не оценка релевантности конкретного чанка или качества
+ответа RAG. Окончательная юридическая валидация этого среза не проводилась.
 
 <p align="center">
-  <img src="docs/article-retrieval.png" alt="Промахи dense, BM25 и hybrid в top-10" width="100%">
+  <img src="docs/article-retrieval-v3.png" alt="В top-10 hybrid почти не отличается от dense, а среди 50 кандидатов оставляет четыре промаха вместо девяти-десяти" width="100%">
 </p>
+
+Для реранкера собран отдельный диагностический срез из 79 вопросов, где
+процитированный пункт НК РФ однозначно сопоставляется с чанком. При основном cutoff 50 BGE
+поднял `cited-clause nDCG@10` с `0,603` до `0,719`, а `Hit@10` — с `67 / 79`
+до `71 / 79`.
 
 <p align="center">
-  <img src="docs/article-reranking.png" alt="Изменение Hit@10 и nDCG@10 после BGE" width="100%">
+  <img src="docs/article-reranking-v3.png" alt="BGE поднял nDCG@10 с 60,3% до 71,9% и Hit@10 с 67 до 71 на 79 вопросах" width="100%">
 </p>
 
-По Hit@10 BGE добавил hybrid одну находку. Его основная работа видна по
-nDCG@10: метрика выросла с `0,832` до `0,883`, то есть нужные фрагменты в
-среднем поднялись выше.
+На 20 кандидатах получились те же `71 / 79` и nDCG@10 `0,727`. Это
+sensitivity-наблюдение на том же наборе, а не независимо подтверждённый
+оптимум. Чистая задержка для 10/20/30/50 пока не измерена.
 
-Правило `явная ссылка на статью -> BM25, иначе hybrid` сохранило `228 / 240`
-находок против `229 / 240` у постоянного hybrid. Одновременно оно подняло
-nDCG@10 с `0,832` до `0,847` и вдвое сократило число вычислений эмбеддинга
-запроса.
+## Паспорт эксперимента
 
-Это результат одного юридического корпуса, а не рейтинг методов вообще. Здесь
-BM25 оказался сильным, а широкий rerank иногда поднимал шум. Код нужен, чтобы
-повторить сравнение на своих документах.
+| Параметр | Значение |
+|---|---|
+| Корпус | НК РФ, редакция от 11 июля 2026 года, 2074 чанка |
+| Вопросы | 240 записей FAQ ФНС из 14 категорий, снимок от 13 августа 2026 года |
+| Отбор | frame зафиксирован до retrieval; только 3 вопроса содержат номер статьи |
+| Dense | `sergeyzh/BERTA@914c8c8aed14042ed890fc2c662d5e9e66b2faa7`, mean pooling |
+| BM25 | Lucene 10.3.2, `RussianAnalyzer` |
+| Объединение выдач | Java RRF, `k = 60`, позиции считаются с единицы |
+| Reranker | `BAAI/bge-reranker-v2-m3@953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e` |
+| Запуск BGE | CUDA, fp16, batch 64, `maxLength=1024` |
+| Qdrant | 1.19.0; отдельно проверены native sparse и встроенный RRF |
 
-## Быстрая проверка
+Правило cited-clause-среза зафиксировано до агрегирования его метрик и не
+читает вопрос, ответ ФНС, позиции или model score. Это диагностический срез:
+сам BGE-прогон существовал раньше структурной разметки.
 
-Нужна Java 21. Maven Wrapper уже лежит в репозитории.
+## Проверить опубликованные результаты
+
+Нужна Java 21. Все команды запускаются из корня репозитория.
 
 ```bash
 ./mvnw --batch-mode --no-transfer-progress test
+
+(cd results/v3-citation-silver && sha256sum -c MANIFEST.public.sha256)
+(cd results/v3-bge-cited-clause && sha256sum -c MANIFEST.public.sha256)
+
+bash scripts/check-public-release.sh
 ```
 
-BM25-smoke работает без GPU и внешних моделей:
+Тест `PublicV3ArtifactsContractTest` заново собирает агрегаты из публичных
+построчных файлов и требует побайтового совпадения. Метрики BGE можно пересчитать
+отдельно:
+
+```bash
+./mvnw -q -DskipTests compile dependency:build-classpath \
+  -Dmdep.outputFile=target/runtime-classpath.txt
+
+java -cp "target/classes:$(<target/runtime-classpath.txt)" \
+  ru.brombin.ragview.eval.FnsFaqBgeCutoffEvaluator \
+  --bge-manifest results/v3-bge-cited-clause/bge-manifest.json \
+  --targets-manifest results/v3-bge-cited-clause/cited-clause-manifest.json \
+  --cutoffs 10,20,30,50 \
+  --output results/local/v3-bge-recomputed
+
+cmp results/v3-bge-cited-clause/aggregate.csv \
+  results/local/v3-bge-recomputed/aggregate.csv
+cmp results/v3-bge-cited-clause/per-query.csv \
+  results/local/v3-bge-recomputed/per-query.csv
+
+python3 tools/audit_bge_token_lengths.py \
+  --verify-summary results/v3-bge-cited-clause/token-length-summary.json
+```
+
+Аудит длин хранит 12 000 пар `вопрос — кандидат` и 95 целевых пар без
+исходных текстов. Из них пересчитываются обе цифры из статьи: лимит 512
+обрезал бы 81 из 95 целевых пар, а при 1024 длиннее лимита остались 35 из
+12 000 пар и ни одной целевой. Полная ретокенизация требует локальных снимков с хэшами,
+указанными в `token-length-summary.json`.
+
+Публичный пакет позволяет проверить хэши, позиции и расчёт метрик. Он не
+воспроизводит frozen retrieval побайтово: в этот release пока не включены тексты
+корпуса и FAQ. Это осторожная release-policy, а не утверждение о прямом запрете.
+Причины и источники разобраны в [`DATA_SOURCES.md`](DATA_SOURCES.md).
+
+## Собрать актуальный FAQ
+
+Код Java-сборщика опубликован, сама выгрузка в Git не входит. Перед первым
+запросом сборщик проверяет `robots.txt`. Он делает не более одного запроса в 500 мс,
+останавливается на `403`, а для `429` и `5xx` соблюдает `Retry-After` и ограничивается
+четырьмя попытками.
+
+```bash
+./mvnw -q -DskipTests compile dependency:build-classpath \
+  -Dmdep.outputFile=target/runtime-classpath.txt
+
+java -cp "target/classes:$(<target/runtime-classpath.txt)" \
+  ru.brombin.ragview.eval.FnsFaqCollector \
+  --config data/eval/v3_source_config.json \
+  --output data/local/fns-current
+```
+
+Команда создаёт новый локальный снимок. Он может отличаться от зафиксированного
+снимка от 13 августа 2026 года. Сам запуск сборщика не меняет опубликованные
+метрики. Повторный прогон нужен только если заменить зафиксированный benchmark-frame.
+
+## Запустить код на своих данных
+
+Smoke-тест BM25 не требует GPU и внешних моделей:
 
 ```bash
 RAGVIEW_STRATEGIES=bm25 \
@@ -71,77 +154,45 @@ RAGVIEW_OUTPUT=results/local/smoke/comparison.csv \
 ./mvnw --batch-mode --no-transfer-progress spring-boot:run
 ```
 
-## Проверка таблицы
+Сборка корпуса, сервер BERTA/BGE, Qdrant и полный порядок прогона описаны в
+[`PROTOCOL_V3.md`](data/eval/PROTOCOL_V3.md). Определения метрик и ограничения
+срезов находятся в
+[`METRIC_CONTRACT_V3.md`](data/eval/METRIC_CONTRACT_V3.md).
 
-В `results/article` лежат позиции каждого вопроса после retrieval, reranking и
-маршрутизации. Скрипты анализа используют только стандартную библиотеку
-Python.
-
-```bash
-python3 tools/analyze_retrieval.py \
-  --input results/article/retrieval.csv \
-  --output results/local/retrieval-analysis \
-  --iterations 10000 --seed 20260803 --cluster-pairs
-
-python3 tools/analyze_rerank.py \
-  --input results/article/rerank.csv \
-  --output results/local/rerank-analysis \
-  --iterations 10000 --seed 20260803 --cluster-pairs
-
-(cd results/article && sha256sum -c MANIFEST.sha256)
-```
-
-## Полный прогон
-
-Для dense и BGE нужны Python 3.12+, [`uv`](https://docs.astral.sh/uv/) и NVIDIA
-GPU. Ревизии моделей зафиксированы:
-
-- `sergeyzh/BERTA@914c8c8aed14042ed890fc2c662d5e9e66b2faa7`;
-- `BAAI/bge-reranker-v2-m3@953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e`.
-
-Сначала соберите актуальную редакцию НК РФ:
-
-```bash
-python3 tools/build_tax_code_corpus.py \
-  --output data/local/tax-code-current --workers 6 --refresh
-cp data/eval/v2/questions.json data/local/tax-code-current/questions.json
-```
-
-Затем поднимите локальный сервер моделей:
-
-```bash
-uv run tools/embedding_server.py \
-  --profile berta --batch-size 64 --device cuda \
-  --with-reranker --rerank-batch-size 64 --rerank-precision fp16
-```
-
-В другом терминале запустите Java:
-
-```bash
-SPRING_PROFILES_ACTIVE=berta \
-RAGVIEW_DATASET_PATH=data/local/tax-code-current \
-RAGVIEW_STRATEGIES=dense,bm25,hybrid,routing \
-RAGVIEW_RERANK_ENABLED=true \
-RAGVIEW_OUTPUT=results/local/full/comparison.csv \
-./mvnw --batch-mode --no-transfer-progress spring-boot:run
-```
-
-## Что лежит в репозитории
+## Что опубликовано
 
 ```text
-src/               Java-код и тесты
-tools/             сервер моделей, сборщик корпуса и анализ результатов
-data/eval/v2/      вопросы и разметка
-data/fixtures/     маленький BM25-smoke
-results/article/   позиции запросов и контрольные суммы
-docs/              обложка и графики
+src/                         Java-код, FAQ-сборщик и тесты
+tools/                       сборщик корпуса и локальный сервер моделей
+data/fixtures/               маленький открытый smoke-набор
+data/eval/                   протоколы, конфигурации и хэши
+results/v3-citation-silver/  article-level метрики по qid
+results/v3-bge-cited-clause/ cited-clause labels, ранги BGE, длины пар и метрики
+docs/                        обложка и актуальные графики
 ```
 
-Сводный текст НК РФ был сохранён 11 июля 2026 года. Полный снимок не
-публикуется, поэтому заново скачанная редакция может дать другие абсолютные
-числа. Происхождение данных описано в [`DATA_SOURCES.md`](DATA_SOURCES.md).
+Полный снимок вопросов и ответов не включён в репозиторий: условия ФНС не дают
+интернет-сервисам явного разрешения на массовую перепубликацию. Сборщик получает
+данные непосредственно с сайта ФНС, сохраняет ссылки на источники и предназначен
+для локального воспроизведения эксперимента.
 
-Файл [`ARTICLE.md`](ARTICLE.md) оставлен под текст статьи и ссылку на Habr.
+В release также не входят полный текст НК РФ, review packets, веса моделей и
+локальные результаты. Они хранятся в `data/local/` и `results/local/`, оба
+каталога игнорируются. Release-check дополнительно проверяет имена, содержимое,
+бинарные форматы, ключи и SHA-256 разрешённых изображений.
 
-Автор: Андрей Бромбин, [Telegram](https://t.me/devbrombin). Код распространяется
-по [MIT License](LICENSE).
+Происхождение данных описано в [`DATA_SOURCES.md`](DATA_SOURCES.md), границы
+лицензии — в [`THIRD_PARTY.md`](THIRD_PARTY.md). Репозиторий не является
+правовым справочником, а structural silver не оценивает полноту ответа или
+юридическую достаточность нормы.
+
+Исторический `v2` сохранён как регрессионный тест. В выводах статьи он не
+используется.
+
+## Статья и лицензия
+
+Ссылка на публикацию появится в [`ARTICLE.md`](ARTICLE.md). Автор — Андрей
+Бромбин, [Telegram](https://t.me/devbrombin).
+
+Авторский код распространяется по [MIT License](LICENSE). Лицензия не
+распространяется на материалы ФНС, веса моделей, статью и иллюстрации.

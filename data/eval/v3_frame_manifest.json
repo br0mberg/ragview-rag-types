@@ -1,0 +1,203 @@
+{
+  "schemaVersion": 2,
+  "evalVersion": "tax-eval-v3-fns-frame",
+  "createdAtUtc": "2026-08-13T14:42:39.990025153Z",
+  "updatedAtUtc": "2026-08-15T23:05:03Z",
+  "source": "https://www.nalog.gov.ru/rn77/service/kb/",
+  "publicationPolicy": "builder_hashes_own_labels_model_rankings_and_metrics_without_verbatim_fns_content",
+  "selection": {
+    "status": "frozen_before_retrieval",
+    "configSha256": "50767c5dc924c24743d9020708442b3f9be6ceaaab7eaf42978157988cd65894",
+    "snapshotManifestSha256": "6ad4f705ce5da9c07980e419324c71ce692b3ff9fe8868b18be16cf390ef16c5",
+    "questionsSha256": "d1f6277f0b07fb3413e43248be8bfb632322b2a4affd0f27fde3a4d60e03dab5",
+    "collectedCandidates": 920,
+    "uniqueCandidates": 910,
+    "selectedQuestions": 240,
+    "selectedQuestionCount": 240,
+    "categoryCount": 14,
+    "naturalExactQuestions": 3,
+    "nearDuplicatePairs": 3,
+    "rawPages": 99
+  },
+  "corpus": {
+    "date": "2026-07-11",
+    "documents": 2074,
+    "sha256": "366c21d0599f8742d16584ae2870544de5f71ff652cdea85a54bc76e93ae6d52"
+  },
+  "citationParser": {
+    "status": "technical_extraction_audit_complete_not_gold_qrels",
+    "version": "nk-citation-hints-v2",
+    "reviewManifestSha256": "09044574f0dab1daf44161c25b12e72073a993855b71b7115965f04a4209f6bd",
+    "reviewPacketSha256": "7ff7b430eacfb64d5cd5b9f95c0cfe5040c5682b27e11391b0e3c93e84d50456",
+    "rulesetSha256": "41afaf0b0ab5a1191bf6d1c360526ce8e61287546eaf236d34620ad385778a9e",
+    "questionsWithLiteralNkCitations": 191,
+    "questionsWhereReparseDiffers": 30,
+    "articleReferencesWithoutChunks": 0
+  },
+  "qrelPooling": {
+    "status": "top50_complete",
+    "branchDepth": 50,
+    "rrfKOneBased": 60,
+    "berta": {
+      "manifestSha256": "624bf7d5d8e5cc7d5bd4cd590ce5da41157051eaae95b8c1bf5e4c8f09558fdc",
+      "reviewerPoolSha256": "36367d26f60bcd5c8d46efee20207e8094e6ff750fe9b27e907f9749f107c271",
+      "sealedProvenanceSha256": "4a50edf37d0527e7b0b8d4285181c81fc91f4ad46b9ffca85b6f63de493d8cff"
+    },
+    "frida": {
+      "manifestSha256": "16c09d9bc507a5582aa466a506979f38db1b75303528ea9e8fb62a26c20e0d79",
+      "reviewerPoolSha256": "4d07495a1c74c40f4971a081b358123f844e0cfa04f9f5c5ae296d8e9eb57ee3",
+      "sealedProvenanceSha256": "a5b187b13b271c1f4c31b8844e3cc8c1689d9553f039e58f00b82ec83930fbf5"
+    },
+    "qdrantNativeSparse": {
+      "manifestSha256": "60251c5d2720921f2a8bd66390dfcd98d649cddced432a748230c514446de8fd",
+      "reviewerPoolSha256": "63838a0f41c94cbcc8edac7fdb051ff60953bacb7f3885027afb828bd997a59a",
+      "sealedProvenanceSha256": "c4f17c067a250ea6aba04a869af387f4fe998cfe5cf1f74767d8ceee80e63177"
+    },
+    "bgeTop10FromBertaHybridTop50": {
+      "status": "pinned_gpu_run_complete",
+      "manifestSchemaVersion": 2,
+      "manifestSha256": "b238793211ef2a6533b53c4d43855a7ab06b7eac5d5be4a3eee5f89926807a51",
+      "reviewerPoolSha256": "1e8131ab7172db5e54ac942ca4de09192577a488545238ecfad2357c557c9364",
+      "sealedProvenanceSha256": "92016c8fd914360d9da8c5bedf72af6867657c403fa5ae37d89480cf040bd4cf",
+      "healthResponseSha256": "3b0f88209ebd04f615143d8d83ca89b2cc357444826b2d0e6db527a08201c611",
+      "model": "BAAI/bge-reranker-v2-m3",
+      "revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
+      "device": "cuda",
+      "precision": "fp16",
+      "batchSize": 64,
+      "maxLength": 1024,
+      "scoredCandidatesPerQuestion": 50,
+      "retainedCandidatesPerQuestion": 10
+    }
+  },
+  "qdrantRrfParity": {
+    "status": "complete_with_unspecified_server_tie_order",
+    "manifestSha256": "276b496e965c9e9123c0538b70eb0a538ee95047c903080ffb482cc651ca5b2a",
+    "repeatabilitySummarySha256": "37487d0ea19667b6dd17663c422919e0d6a46df825262b3b741d04eaf2f9c3be",
+    "questions": 240,
+    "sameFullUnionSetCount": 240,
+    "sameTop50SetCount": 189,
+    "sameTop10SetCount": 231,
+    "scoreEquivalentCount": 240,
+    "nonTieDifferenceCount": 0,
+    "identicalOrderCount": 0,
+    "serverFullOrderRepeatableCount": 0,
+    "serverTop50OrderRepeatableCount": 4,
+    "serverTop50SetRepeatableCount": 198,
+    "serverTop10OrderRepeatableCount": 201,
+    "serverTop10SetRepeatableCount": 233,
+    "clientFullOrderRepeatableCount": 240,
+    "interpretation": "Qdrant and deterministic client RRF have the same complete fused union and agree on per-document scores up to tolerance; ties can change top-k membership and server order between runs"
+  },
+  "reviewSubset": {
+    "selectionStatus": "frozen_before_qrels",
+    "selectedQuestions": 120,
+    "categoryCount": 14,
+    "subsetManifestSha256": "89d8886e17fd7e8f23bc1c8ef61b2b7cac1d5300b2ba1d69fe2f6ab848df0704",
+    "fullAssemblyManifestSha256": "31f4f8a02c183a847e2c28758bc9fde45945920f096db3e7cc4ce6d700a1af05",
+    "subsetAssemblyManifestSha256": "c395299e2ca0d01e8ff51515e8b3433ec62907b6549c5dbff77968198bfb58d5",
+    "reviewPacketASha256": "51146a30b794a088641bce1f1196ec02fc98c8ff9e9440cc211d65d95f7038d6",
+    "reviewPacketBSha256": "8b8f490562565c17a8c4c236a27409bed8f87ca630c9e5c5b9b346810db33720",
+    "immutablePayloadAlgorithm": "sha256-length-prefixed-utf8-immutable-review-payload-v2-order-sensitive",
+    "packetStatus": "superseded_requires_reassembly_with_bge_max_length_1024",
+    "bgeDependency": {
+      "status": "superseded",
+      "maxLength": 512,
+      "manifestSha256": "8088c3b1accdbafa7b5feb5098eb8758e6775ffa9616cffdf283aedfb17c306c",
+      "replacementManifestSha256": "b238793211ef2a6533b53c4d43855a7ab06b7eac5d5be4a3eee5f89926807a51",
+      "reassemblyStatus": "pending"
+    },
+    "postQrelsSplitStatus": "pending_qrels"
+  },
+  "blindedReview": {
+    "sameCandidateSets": 120,
+    "differentCandidateOrders": 120,
+    "status": "superseded_requires_reassembly_with_bge_max_length_1024"
+  },
+  "citationSilver": {
+    "status": "technical_extraction_and_preliminary_temporal_screen_complete_pending_tax_domain_and_temporal_expert_validation",
+    "auditSchemaVersion": 3,
+    "auditDecisionsSha256": "bdeb58b27406e8a3b3933a8fa01286c7390c0f7b4a56d3c288cbff92d7fbe570",
+    "evaluationManifestSha256": "2209ab3e8056cdd24dff475229df2f0a21a6c427adc62707e3d8f02f4a728e71",
+    "evaluationSlices": {
+      "preliminaryFiltered": {
+        "id": "preliminary_filtered",
+        "questions": 186,
+        "reportingRole": "primary_technical_before_expert_validation"
+      },
+      "literalCitationAll": {
+        "id": "literal_citation_all",
+        "questions": 191,
+        "reportingRole": "sensitivity"
+      }
+    },
+    "literalCitationQuestions": 191,
+    "metricEligibleQuestions": 186,
+    "provisionalTemporalMismatchCount": 4,
+    "provisionalSourceTypoCount": 1,
+    "partialScopeFlags": 17,
+    "duplicateSensitivityFlags": 1,
+    "notGoldAnswerQuality": true,
+    "citedArticleHitCounts": {
+      "bertaDenseAt10": 162,
+      "luceneBm25At10": 153,
+      "bertaHybridAt10": 163,
+      "bertaDenseAt50": 176,
+      "luceneBm25At50": 177,
+      "bertaHybridAt50": 182,
+      "oracleUnionAt50": 183,
+      "qdrantClientRrfAt10": 160,
+      "qdrantClientRrfAt50": 183
+    },
+    "literalCitationSensitivityHitCounts": {
+      "bertaDenseAt10": 166,
+      "luceneBm25At10": 156,
+      "bertaHybridAt10": 165,
+      "bertaDenseAt50": 181,
+      "luceneBm25At50": 182,
+      "bertaHybridAt50": 187
+    },
+    "pairedPostHocDiagnostics": {
+      "bertaHybridVsDenseAt10RescueHarm": "8/7",
+      "bertaHybridVsDenseAt50RescueHarm": "6/0; exact paired binomial p=0.03125",
+      "bertaHybridVsLuceneBm25At50RescueHarm": "6/1; exact paired binomial p=0.125",
+      "qdrantClientRrfVsDenseAt10RescueHarm": "7/9",
+      "qdrantClientRrfVsDenseAt50RescueHarm": "7/0; exact paired binomial p=0.015625",
+      "qdrantClientRrfVsNativeSparseAt50RescueHarm": "8/0; exact paired binomial p=0.0078125"
+    }
+  },
+  "citedClauseSilver": {
+    "status": "frozen_post_hoc_structural_silver_not_gold_qrels",
+    "contractSha256": "d38973f33e9488fcd414686d397a627c4979664575ed4267715affb54edb233c",
+    "targetManifestSha256": "cc3729cfe0eb44a3de085dfffd0fc3fd201380126520b7625ba5b366580fce58",
+    "labelsSha256": "f73f2b802395f3f68544bc47e35bedf8fa08680eff6574b1d7095d3f5213f49f",
+    "primaryCitedClauseQuestions": 79,
+    "primaryQueryGroups": 78,
+    "sourceQuestions": 240,
+    "bgeEvaluation": {
+      "status": "complete",
+      "manifestSha256": "ceaff7b4cc171c7c3ea56d8978c83339b28cf3d149b106a63e7c67031983c4ed",
+      "publicManifestSha256": "53682910c4d9e882924774e58360ca62b7f679f80870a4cced1f4906d6a8da0b",
+      "primaryCutoff": 50,
+      "sensitivityCutoffs": [ 10, 20, 30 ],
+      "beforeHitAt10": "67/79",
+      "afterHitAt10": "71/79",
+      "beforeNdcgAt10": 0.603152288,
+      "afterNdcgAt10": 0.719341514,
+      "deltaCi95": [ 0.055544729, 0.180976415 ],
+      "observedC20AfterHitAt10": "71/79",
+      "observedC20AfterNdcgAt10": 0.726769241,
+      "c20OptimalityClaim": false
+    },
+    "notGoldAnswerQuality": true
+  },
+  "evaluation": {
+    "qrelsFrozen": false,
+    "qualityMetricsCalculated": false,
+    "citedClauseSilverQualityMetricsCalculated": true,
+    "goldQrelsFrozen": false,
+    "goldQualityMetricsCalculated": false,
+    "devTestSplitCreated": false,
+    "status": "article_and_cited_clause_silver_complete_gold_review_pending"
+  }
+}

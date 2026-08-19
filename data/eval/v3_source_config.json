@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "source": "https://www.nalog.gov.ru/rn77/service/kb/",
+  "endpoint": "https://www.nalog.gov.ru/Ajax.html",
+  "regionId": 446,
+  "selectionSeed": "ragview-tax-eval-v3-fns-2026-08-13",
+  "pagesPerCategory": 8,
+  "requestDelayMs": 500,
+  "selection": {
+    "unit": "question",
+    "targetTotal": 240,
+    "mode": "balanced_by_category",
+    "pageSelection": "sha256_rank_without_replacement",
+    "splitSeed": "ragview-tax-eval-v3-split-2026-08-13"
+  },
+  "nearDuplicates": {
+    "algorithm": "normalized_levenshtein",
+    "threshold": 0.75
+  },
+  "scope": {
+    "level": "federal",
+    "corpusDate": "2026-07-11",
+    "corpusSha256": "366c21d0599f8742d16584ae2870544de5f71ff652cdea85a54bc76e93ae6d52"
+  },
+  "categories": [
+    {"id": 1028, "name": "Единый налоговый счет"},
+    {"id": 263, "name": "НДФЛ"},
+    {"id": 265, "name": "НДС"},
+    {"id": 264, "name": "Налог на прибыль"},
+    {"id": 267, "name": "УСН"},
+    {"id": 705, "name": "Налоговый контроль"},
+    {"id": 882, "name": "Страховые взносы"},
+    {"id": 246, "name": "Урегулирование задолженности"},
+    {"id": 911, "name": "Налог на профессиональный доход"},
+    {"id": 704, "name": "Трансфертное ценообразование"},
+    {"id": 270, "name": "ЕСХН"},
+    {"id": 746, "name": "Патентная система"},
+    {"id": 259, "name": "Налог на имущество"},
+    {"id": 268, "name": "Акцизы"}
+  ]
+}

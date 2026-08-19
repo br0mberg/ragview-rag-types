@@ -1,0 +1,45 @@
+{
+  "artifacts": {
+    "candidatePairTokenLengths": {
+      "filename": "retrieval-pair-token-lengths.csv",
+      "sha256": "0ecf67176ffcb86a66be46082523a46d88276b57c6c9c933fc8057ddf07a132e"
+    },
+    "targetPairTokenLengths": {
+      "filename": "target-pair-token-lengths.csv",
+      "sha256": "e6e90d3d16d09aaae38efa2288c1b8d7633e2833597aeb88b0fd8dc166c32166"
+    }
+  },
+  "candidatePairs": {
+    "max": 1132,
+    "min": 37,
+    "over1024": 35,
+    "over512": 9681,
+    "pairs": 12000
+  },
+  "inputs": {
+    "corpusSha256": "366c21d0599f8742d16584ae2870544de5f71ff652cdea85a54bc76e93ae6d52",
+    "labelsSha256": "7eb143b1b78f3e3e541ab50f29b3b16f8d7d5a4543a0fecd802d722f6e19c594",
+    "questionsSha256": "d1f6277f0b07fb3413e43248be8bfb632322b2a4affd0f27fde3a4d60e03dab5",
+    "rankingsSha256": "92016c8fd914360d9da8c5bedf72af6867657c403fa5ae37d89480cf040bd4cf"
+  },
+  "method": "AutoTokenizer pair encoding with add_special_tokens=true, padding=false, truncation=false",
+  "publication": {
+    "containsCorpusText": false,
+    "containsQuestionOrAnswerText": false,
+    "containsStructuralDocumentIdentifiers": true
+  },
+  "schemaVersion": 1,
+  "targetPairs": {
+    "max": 980,
+    "min": 221,
+    "over1024": 0,
+    "over512": 81,
+    "pairs": 95
+  },
+  "tokenizer": {
+    "implementation": "XLMRobertaTokenizerFast",
+    "model": "BAAI/bge-reranker-v2-m3",
+    "revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
+    "transformersVersion": "4.53.2"
+  }
+}

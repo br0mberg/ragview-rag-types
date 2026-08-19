@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 2,
+  "evalVersion": "tax-eval-v3-bge-reranker-pool",
+  "createdAtUtc": "2026-08-15T22:26:35.344884833Z",
+  "sourceEvalVersion": "tax-eval-v3-fns-candidates",
+  "questionCount": 240,
+  "corpusDocumentCount": 2074,
+  "rerankerAttestation": {
+    "healthSchemaVersion": 1,
+    "model": "BAAI/bge-reranker-v2-m3",
+    "revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
+    "precision": "fp16",
+    "device": "cuda",
+    "batchSize": 64,
+    "maxLength": 1024,
+    "healthResponseSha256": "3b0f88209ebd04f615143d8d83ca89b2cc357444826b2d0e6db527a08201c611"
+  },
+  "pooling": {
+    "topN": 10,
+    "scoredPool": 50,
+    "profile": "bge-cross-encoder",
+    "implementation": "cross-encoder-reranker",
+    "model": "BAAI/bge-reranker-v2-m3",
+    "revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
+    "precision": "fp16",
+    "device": "cuda",
+    "batchSize": 64,
+    "maxLength": 1024,
+    "ordering": "score_desc,first_stage_rank_asc,doc_id_asc"
+  },
+  "sealedProvenance": {
+    "filename": "bge-ranking.jsonl",
+    "sha256": "92016c8fd914360d9da8c5bedf72af6867657c403fa5ae37d89480cf040bd4cf"
+  }
+}

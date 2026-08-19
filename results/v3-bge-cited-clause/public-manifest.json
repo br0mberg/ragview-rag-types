@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "evalVersion": "tax-eval-v3-bge-cutoff-evaluation-v1",
+  "status": "frozen_post_hoc_cited_clause_silver_not_gold",
+  "frame": {
+    "questions": 240,
+    "questionsSha256": "d1f6277f0b07fb3413e43248be8bfb632322b2a4affd0f27fde3a4d60e03dab5",
+    "corpusDocuments": 2074,
+    "corpusSha256": "366c21d0599f8742d16584ae2870544de5f71ff652cdea85a54bc76e93ae6d52"
+  },
+  "target": {
+    "evalVersion": "tax-eval-v3-cited-clause-silver-v3",
+    "ruleVersion": "strict-cited-clause-silver-v3",
+    "eligiblePrimaryQuestions": 79,
+    "eligiblePrimaryQueryGroups": 78,
+    "articleOnlySensitivityQuestions": 12,
+    "mixedSensitivityQuestions": 2,
+    "excludedQuestions": 147,
+    "contractSha256": "d38973f33e9488fcd414686d397a627c4979664575ed4267715affb54edb233c",
+    "internalManifestSha256": "cc3729cfe0eb44a3de085dfffd0fc3fd201380126520b7625ba5b366580fce58",
+    "internalLabelsSha256": "f73f2b802395f3f68544bc47e35bedf8fa08680eff6574b1d7095d3f5213f49f",
+    "labelsCanonicalJsonSha256": "d447a9a347cf0bc22c39bb1799ae159e98bdb77aad005d2a84afff4f13854126",
+    "publicSerialization": "Same JSON records with a terminal newline"
+  },
+  "bge": {
+    "model": "BAAI/bge-reranker-v2-m3",
+    "revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
+    "device": "cuda",
+    "precision": "fp16",
+    "batchSize": 64,
+    "maxLength": 1024,
+    "scoredCandidatesPerQuestion": 50,
+    "internalManifestSha256": "b238793211ef2a6533b53c4d43855a7ab06b7eac5d5be4a3eee5f89926807a51",
+    "internalProvenanceSha256": "92016c8fd914360d9da8c5bedf72af6867657c403fa5ae37d89480cf040bd4cf",
+    "internalReviewerPoolSha256": "1e8131ab7172db5e54ac942ca4de09192577a488545238ecfad2357c557c9364",
+    "healthResponseSha256": "3b0f88209ebd04f615143d8d83ca89b2cc357444826b2d0e6db527a08201c611"
+  },
+  "tokenLengthAudit": {
+    "method": "XLMRobertaTokenizerFast pair encoding; add_special_tokens=true, padding=false, truncation=false",
+    "transformersVersion": "4.53.2",
+    "candidatePairs": {
+      "pairs": 12000,
+      "over512": 9681,
+      "over1024": 35,
+      "max": 1132
+    },
+    "targetPairs": {
+      "pairs": 95,
+      "over512": 81,
+      "over1024": 0,
+      "max": 980
+    }
+  },
+  "evaluation": {
+    "internalManifestSha256": "ceaff7b4cc171c7c3ea56d8978c83339b28cf3d149b106a63e7c67031983c4ed",
+    "topK": 10,
+    "primaryCutoff": 50,
+    "sensitivityCutoffs": [10, 20, 30],
+    "primaryC50": {
+      "candidateHit": "74/79",
+      "beforeHitAt10": "67/79",
+      "afterHitAt10": "71/79",
+      "beforeNdcgAt10": 0.603152288,
+      "afterNdcgAt10": 0.719341514,
+      "meanDeltaNdcgAt10": 0.116189225,
+      "deltaCi95": [0.055544729, 0.180976415],
+      "winsTiesLosses": "30/37/12"
+    },
+    "observedC20Sensitivity": {
+      "candidateHit": "72/79",
+      "afterHitAt10": "71/79",
+      "afterNdcgAt10": 0.726769241,
+      "interpretation": "Same-frame sensitivity result; it does not establish an optimal cutoff"
+    }
+  },
+  "artifacts": {
+    "aggregateCsv": {
+      "filename": "aggregate.csv",
+      "sha256": "720a147878a23cedcac2b2a76162c9e9f8809b4be221c1dd1285eed8ed43d2ec"
+    },
+    "perQueryCsv": {
+      "filename": "per-query.csv",
+      "sha256": "1751e1e5f8933f2a7fc8c68d773ff7b57ce8656741e00f475984b49f8e7d8ed3"
+    },
+    "publicBgeManifest": {
+      "filename": "bge-manifest.json",
+      "sha256": "3c2eb8b7c09f8b0795095c3f6b353e6a4efd9872dead3f1e7f6c3dfa83be93f2"
+    },
+    "bgeRanking": {
+      "filename": "bge-ranking.jsonl",
+      "sha256": "92016c8fd914360d9da8c5bedf72af6867657c403fa5ae37d89480cf040bd4cf"
+    },
+    "publicTargetManifest": {
+      "filename": "cited-clause-manifest.json",
+      "sha256": "310905f17f8c03165d48cb9a7fcad87825077b6c6d8ce8c9979c0d3666f366e1"
+    },
+    "citedClauseLabels": {
+      "filename": "cited-clause-labels.json",
+      "sha256": "7eb143b1b78f3e3e541ab50f29b3b16f8d7d5a4543a0fecd802d722f6e19c594"
+    },
+    "candidatePairTokenLengths": {
+      "filename": "retrieval-pair-token-lengths.csv",
+      "sha256": "0ecf67176ffcb86a66be46082523a46d88276b57c6c9c933fc8057ddf07a132e"
+    },
+    "targetPairTokenLengths": {
+      "filename": "target-pair-token-lengths.csv",
+      "sha256": "e6e90d3d16d09aaae38efa2288c1b8d7633e2833597aeb88b0fd8dc166c32166"
+    },
+    "tokenLengthSummary": {
+      "filename": "token-length-summary.json",
+      "sha256": "4ea9cc4907d30b76f050de223f09cb90ec7e737612fbb34bee3bbfd272b7f9fb"
+    }
+  },
+  "publication": {
+    "containsQuestionOrAnswerText": false,
+    "containsCitedSource": false,
+    "containsCorpusText": false,
+    "containsAuditTrace": false,
+    "containsStructuralDocumentIdentifiers": true,
+    "containsModelScores": true
+  },
+  "limitation": "The primary slice tests structural correspondence between a cited Tax Code clause and one chunk. It does not establish passage relevance, evidence sufficiency, legal correctness or answer quality. C20 is a sensitivity point on the same data, not a tuned optimum."
+}
