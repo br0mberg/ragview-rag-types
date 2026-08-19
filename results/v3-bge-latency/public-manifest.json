@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "evalVersion": "tax-eval-v3-bge-latency-public-v1",
+  "createdAtUtc": "2026-08-19T14:26:04.079709253Z",
+  "frame": {
+    "questionCount": 240,
+    "corpusDocumentCount": 2074,
+    "questionsSha256": "d1f6277f0b07fb3413e43248be8bfb632322b2a4affd0f27fde3a4d60e03dab5",
+    "corpusSha256": "366c21d0599f8742d16584ae2870544de5f71ff652cdea85a54bc76e93ae6d52"
+  },
+  "reranker": {
+    "model": "BAAI/bge-reranker-v2-m3",
+    "revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
+    "precision": "fp16",
+    "device": "cuda",
+    "batchSize": 64,
+    "maxLength": 1024,
+    "healthResponseSha256": "3b0f88209ebd04f615143d8d83ca89b2cc357444826b2d0e6db527a08201c611",
+    "sourceBgeManifestSha256": "b238793211ef2a6533b53c4d43855a7ab06b7eac5d5be4a3eee5f89926807a51",
+    "sourceBgeProvenanceSha256": "92016c8fd914360d9da8c5bedf72af6867657c403fa5ae37d89480cf040bd4cf"
+  },
+  "measurement": {
+    "cutoffs": [10, 20, 30, 50],
+    "warmupQuestionCount": 8,
+    "warmupRepeats": 1,
+    "measuredRepeats": 3,
+    "sampleCount": 2880,
+    "samplesPerCutoff": 720,
+    "orderSeed": "ragview-v3-bge-latency-order-2026-08-16",
+    "orderAlgorithm": "sha256(seed\\0phase\\0repeat\\0qid), then sha256(seed\\0phase\\0repeat\\0qid\\0cutoff)",
+    "timer": "System.nanoTime",
+    "operation": "RerankScorer.score(query, first-stage prefix)",
+    "percentileAlgorithm": "nearest-rank: ceil(p*n)-1",
+    "sourceRunManifestSha256": "889c90896a545a1a234ffccc23f6fa37580ddcfbf5353fb76bd1170abd2f1316",
+    "sourceRunRawMeasurementsSha256": "6b11e177fdc1fd3b0556c0ff6db6dba345551c03fc9bdf243b624f1367ff315a"
+  },
+  "runtime": {
+    "gpu": "NVIDIA GeForce RTX 5060 Ti",
+    "gpuMemoryMiB": 16311,
+    "driverVersion": "595.84",
+    "javaVersion": "21.0.11",
+    "os": "Linux 7.0.0-28-generic amd64",
+    "availableProcessors": 32,
+    "otherGpuComputeProcessesAtStart": 0
+  },
+  "artifacts": {
+    "samples": {
+      "filename": "samples.csv",
+      "sha256": "1093c82c40d724efd5d1dd23bfcb1851a2f408c3c545db3b05ce85f37cefd241"
+    },
+    "summary": {
+      "filename": "summary.csv",
+      "sha256": "8673628e294f625856c09b2f10ae1411a09ac0d370ca47b2f16083492db38cea"
+    }
+  },
+  "publication": {
+    "containsQuestionOrAnswerText": false,
+    "containsCorpusText": false,
+    "containsQuestionOrDocumentIdentifiers": false
+  },
+  "limitations": [
+    "This is a single-workstation latency measurement, not a service-level objective.",
+    "The timer covers one local HTTP reranker call and model scoring; retrieval and generation are excluded.",
+    "The run used fixed candidate prefixes and does not include concurrent load."
+  ]
+}

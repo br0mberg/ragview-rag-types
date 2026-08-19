@@ -8,16 +8,20 @@ import ru.brombin.ragview.eval.FnsFaqBgeCutoffEvaluator;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.security.MessageDigest;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HexFormat;
+import java.util.List;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.within;
 
 class PublicV3ArtifactsContractTest {
 
     static final Path RESULTS = Path.of("results/v3-citation-silver");
     static final Path BGE_RESULTS = Path.of("results/v3-bge-cited-clause");
+    static final Path BGE_LATENCY_RESULTS = Path.of("results/v3-bge-latency");
 
     @Test
     void publicArtifacts_shouldMatchManifestAndContainNoSourceText() throws Exception {
@@ -259,6 +263,72 @@ class PublicV3ArtifactsContractTest {
             String[] parts = line.split("  ", 2);
             assertThat(parts).hasSize(2);
             assertThat(sha256(BGE_RESULTS.resolve(parts[1]))).isEqualTo(parts[0]);
+        }
+    }
+
+    @Test
+    void publicBgeLatency_shouldRecomputeSummaryWithoutSourceText() throws Exception {
+        var mapper = new JsonMapper();
+        var manifest = mapper.readTree(BGE_LATENCY_RESULTS.resolve("public-manifest.json").toFile());
+
+        assertThat(manifest.path("evalVersion").asText())
+                .isEqualTo("tax-eval-v3-bge-latency-public-v1");
+        assertThat(manifest.path("frame").path("questionCount").asInt()).isEqualTo(240);
+        assertThat(manifest.path("reranker").path("maxLength").asInt()).isEqualTo(1024);
+        assertThat(manifest.path("measurement").path("sampleCount").asInt()).isEqualTo(2_880);
+        assertThat(manifest.path("runtime").path("gpu").asText())
+                .isEqualTo("NVIDIA GeForce RTX 5060 Ti");
+        assertThat(manifest.path("publication").path("containsQuestionOrAnswerText").asBoolean())
+                .isFalse();
+        assertArtifactHash(BGE_LATENCY_RESULTS, manifest, "samples");
+        assertArtifactHash(BGE_LATENCY_RESULTS, manifest, "summary");
+
+        var samples = new HashMap<Integer, List<Double>>();
+        var sampleLines = Files.readAllLines(BGE_LATENCY_RESULTS.resolve("samples.csv"));
+        assertThat(sampleLines).hasSize(2_881);
+        assertThat(sampleLines.getFirst())
+                .isEqualTo("sequence,repeat,cutoff,candidate_count,elapsed_ns,elapsed_ms")
+                .doesNotContain("qid", "question", "answer", "doc_id");
+        for (String line : sampleLines.subList(1, sampleLines.size())) {
+            String[] columns = line.split(",", -1);
+            assertThat(columns).hasSize(6);
+            int cutoff = Integer.parseInt(columns[2]);
+            assertThat(Integer.parseInt(columns[3])).isEqualTo(cutoff);
+            samples.computeIfAbsent(cutoff, ignored -> new ArrayList<>())
+                    .add(Double.parseDouble(columns[5]));
+        }
+
+        var summaryLines = Files.readAllLines(BGE_LATENCY_RESULTS.resolve("summary.csv"));
+        assertThat(summaryLines).hasSize(5);
+        for (String line : summaryLines.subList(1, summaryLines.size())) {
+            String[] columns = line.split(",", -1);
+            int cutoff = Integer.parseInt(columns[0]);
+            List<Double> values = samples.get(cutoff);
+            values.sort(Double::compareTo);
+            assertThat(values).hasSize(720);
+            double mean = values.stream().mapToDouble(Double::doubleValue).average().orElseThrow();
+            double p50 = values.get((int) Math.ceil(0.50 * values.size()) - 1);
+            double p95 = values.get((int) Math.ceil(0.95 * values.size()) - 1);
+            assertThat(Double.parseDouble(columns[1])).isEqualTo(values.size());
+            assertThat(Double.parseDouble(columns[2])).isCloseTo(mean, within(0.000001));
+            assertThat(Double.parseDouble(columns[3])).isEqualTo(p50);
+            assertThat(Double.parseDouble(columns[4])).isEqualTo(p95);
+        }
+        assertThat(samples.keySet()).isEqualTo(Set.of(10, 20, 30, 50));
+    }
+
+    @Test
+    void publicBgeLatencyChecksumFile_shouldCoverEveryArtifact() throws Exception {
+        var expected = Files.readAllLines(BGE_LATENCY_RESULTS.resolve("MANIFEST.public.sha256"));
+
+        assertThat(expected).hasSize(3);
+        assertThat(expected.stream().map(line -> line.split("  ", 2)[1])
+                .collect(java.util.stream.Collectors.toSet()))
+                .isEqualTo(Set.of("public-manifest.json", "samples.csv", "summary.csv"));
+        for (String line : expected) {
+            String[] parts = line.split("  ", 2);
+            assertThat(parts).hasSize(2);
+            assertThat(sha256(BGE_LATENCY_RESULTS.resolve(parts[1]))).isEqualTo(parts[0]);
         }
     }
 

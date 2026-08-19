@@ -24,6 +24,12 @@ results/v3-bge-cited-clause/*
 !results/v3-bge-cited-clause/target-pair-token-lengths.csv
 !results/v3-bge-cited-clause/token-length-summary.json
 !results/v3-bge-cited-clause/MANIFEST.public.sha256
+!results/v3-bge-latency/
+results/v3-bge-latency/*
+!results/v3-bge-latency/samples.csv
+!results/v3-bge-latency/summary.csv
+!results/v3-bge-latency/public-manifest.json
+!results/v3-bge-latency/MANIFEST.public.sha256
 
 data/tax-code-snapshot/
 data/local/
@@ -37,6 +43,7 @@ src/main/java/ru/brombin/ragview/QdrantBenchmarkRunner.java
 src/main/java/ru/brombin/ragview/eval/*
 !src/main/java/ru/brombin/ragview/eval/CitationSilverPairedAnalysis.java
 !src/main/java/ru/brombin/ragview/eval/FnsFaqBgeCutoffEvaluator.java
+!src/main/java/ru/brombin/ragview/eval/FnsFaqBgeLatencyRunner.java
 !src/main/java/ru/brombin/ragview/eval/FnsFaqCandidate.java
 !src/main/java/ru/brombin/ragview/eval/FnsFaqCandidateSampler.java
 !src/main/java/ru/brombin/ragview/eval/FnsFaqCollector.java
@@ -56,6 +63,7 @@ src/main/java/ru/brombin/ragview/qdrant/*
 
 src/test/java/ru/brombin/ragview/FnsFaq*.java
 !src/test/java/ru/brombin/ragview/FnsFaqBgeCutoffEvaluatorContractTest.java
+!src/test/java/ru/brombin/ragview/FnsFaqBgeLatencyRunnerContractTest.java
 !src/test/java/ru/brombin/ragview/FnsFaqConfigContractTest.java
 !src/test/java/ru/brombin/ragview/FnsFaqHttpClientContractTest.java
 !src/test/java/ru/brombin/ragview/FnsFaqParserContractTest.java
